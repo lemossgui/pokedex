@@ -41,7 +41,10 @@ class _PokemonListPageState extends State<PokemonListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pokedex'),
+        title: Text(
+          'Pokedex',
+          style: Fonts.display3.copyWithBold().copyWithPrimaryColor(),
+        ),
       ),
       body: StreamBuilder<List<PokemonModel>>(
         stream: _bloc.pokemons,
@@ -49,11 +52,12 @@ class _PokemonListPageState extends State<PokemonListPage> {
           final pokemons = snapshot.data;
           return snapshot.hasData
               ? ListView.separated(
+                  padding: const EdgeInsets.all(8.0),
                   controller: _scrollController,
                   itemBuilder: (_, index) => pokemons.length > index
                       ? _buildPokemonCard(pokemons[index])
                       : _buildBottomLoader(),
-                  separatorBuilder: (_, index) => const SizedBox(height: 8.0),
+                  separatorBuilder: (_, index) => const SizedBox(height: 4.0),
                   itemCount: pokemons.length + 1,
                 )
               : LinearProgressIndicator();
@@ -63,27 +67,54 @@ class _PokemonListPageState extends State<PokemonListPage> {
   }
 
   Widget _buildPokemonCard(PokemonModel pokemon) {
+    final imageProvider = NetworkImage(pokemon.urlPngImage);
     return GestureDetector(
       onTap: () => _navigateToPokemonDetails(pokemon.url),
-      child: Card(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: <Widget>[
-              Text(pokemon.displayName),
-              SvgPicture.network(
-                pokemon.urlImage,
-                width: MediaQuery.of(context).size.width * 0.12,
-                placeholderBuilder: (BuildContext context) => Container(
-                  width: MediaQuery.of(context).size.width * 0.12,
-                  height: MediaQuery.of(context).size.width * 0.12,
-                  alignment: Alignment.center,
-                  child: const CircularProgressIndicator(),
+      child: FutureBuilder<Color>(
+        future: getDominantColorFromImage(imageProvider),
+        builder: (_, snapshot) {
+          final cardColor = snapshot.data ?? backgroundLightColor;
+          return Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    cardColor,
+                    cardColor.withOpacity(0.3),
+                  ],
                 ),
+                borderRadius: BorderRadius.circular(8.0),
               ),
-            ],
-          ),
-        ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    pokemon.displayName,
+                    style: Fonts.display4
+                        .copyWithBold()
+                        .copyWithSecondaryTextColor(),
+                  ),
+                  SvgPicture.network(
+                    pokemon.urlSvgImage,
+                    width: MediaQuery.of(context).size.width * 0.15,
+                    height: MediaQuery.of(context).size.width * 0.15,
+                    placeholderBuilder: (BuildContext context) => Container(
+                      width: MediaQuery.of(context).size.width * 0.15,
+                      height: MediaQuery.of(context).size.width * 0.15,
+                      alignment: Alignment.center,
+                      child: const CircularProgressIndicator(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

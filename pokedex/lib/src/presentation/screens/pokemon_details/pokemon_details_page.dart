@@ -52,7 +52,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SvgPicture.network(
-                          pokemon.urlImage,
+                          pokemon.urlSvgImage,
                           width: MediaQuery.of(context).size.width * 0.5,
                           placeholderBuilder: (BuildContext context) =>
                               Container(

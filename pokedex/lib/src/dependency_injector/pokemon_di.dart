@@ -4,18 +4,27 @@ class PokemonDI extends DependencyInjector {
   @override
   void registerAll() {
     injector.registerFactory<PokemonRepository, PokemonDataRepository>(
-      (c) => PokemonDataRepository(),
-    );
-
-    injector.registerFactory(
-      (c) => PokemonListBloc(
-        pokemonRepository: c.resolve(),
+      (i) => PokemonDataRepository(
+        pokemonMapper: i.resolve(),
       ),
     );
 
     injector.registerFactory(
-      (c) => PokemonDetailsBloc(
-        pokemonRepository: c.resolve(),
+      (i) => PokemonMapper(
+        typeMapper: i.resolve(),
+        statMapper: i.resolve(),
+      ),
+    );
+
+    injector.registerFactory(
+      (i) => PokemonListBloc(
+        pokemonRepository: i.resolve(),
+      ),
+    );
+
+    injector.registerFactory(
+      (i) => PokemonDetailsBloc(
+        pokemonRepository: i.resolve(),
       ),
     );
   }

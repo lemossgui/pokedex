@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: routes,
+      theme: theme,
       home: StartApplicationWidget(
         child: _buildMainContent,
         strategyInit: strategyInit,

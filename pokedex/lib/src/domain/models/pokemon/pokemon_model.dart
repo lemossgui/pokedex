@@ -27,8 +27,11 @@ class PokemonModel {
     return urlSplitted[urlSplitted.length - 2];
   }
 
-  String get urlImage =>
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/$idFromUrl.svg';
+  String get urlSvgImage =>
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${idFromUrl ?? this.id}.svg';
+
+  String get urlPngImage =>
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${idFromUrl ?? this.id}.png';
 
   PokemonModel copyWith({
     int id,
@@ -47,22 +50,6 @@ class PokemonModel {
       types: types ?? this.types,
       stats: stats ?? this.stats,
       url: url ?? this.url,
-    );
-  }
-
-  factory PokemonModel.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return PokemonModel(
-      id: map['id'],
-      name: map['name'],
-      weight: map['weight'],
-      height: map['height'],
-      // types:
-      //     List<TypeModel>.from(map['types']?.map((x) => TypeModel.fromMap(x))),
-      // stats:
-      //     List<StatModel>.from(map['stats']?.map((x) => StatModel.fromMap(x))),
-      url: map['url'],
     );
   }
 }

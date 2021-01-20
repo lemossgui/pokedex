@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:pokedex/export.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -5,7 +6,7 @@ class PokemonDetailsBloc extends BaseBloc<PokemonDetailsEvents> {
   final PokemonRepository _pokemonRepository;
 
   PokemonDetailsBloc({
-    PokemonRepository pokemonRepository,
+    @required PokemonRepository pokemonRepository,
   }) : _pokemonRepository = pokemonRepository;
 
   final _pokemonController = BehaviorSubject<PokemonModel>();

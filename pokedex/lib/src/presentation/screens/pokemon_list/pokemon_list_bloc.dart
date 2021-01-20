@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:pokedex/export.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -6,7 +6,7 @@ class PokemonListBloc extends BaseBloc<PokemonListEvents> {
   final PokemonRepository _pokemonRepository;
 
   PokemonListBloc({
-    PokemonRepository pokemonRepository,
+    @required PokemonRepository pokemonRepository,
   }) : _pokemonRepository = pokemonRepository;
 
   final _pokemonsController = BehaviorSubject<List<PokemonModel>>();
