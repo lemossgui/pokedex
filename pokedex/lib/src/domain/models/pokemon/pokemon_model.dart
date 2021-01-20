@@ -5,8 +5,8 @@ class PokemonModel {
   final String name;
   final int weight;
   final int height;
-  final List<TypeModel> types;
-  final List<StatModel> stats;
+  final List<TypeInfoModel> typesInfo;
+  final List<StatInfoModel> statsInfo;
   final String url;
 
   PokemonModel({
@@ -14,8 +14,8 @@ class PokemonModel {
     this.name,
     this.weight,
     this.height,
-    this.types,
-    this.stats,
+    this.typesInfo,
+    this.statsInfo,
     this.url,
   });
 
@@ -38,8 +38,8 @@ class PokemonModel {
     String name,
     int weight,
     int height,
-    List<TypeModel> types,
-    List<StatModel> stats,
+    List<TypeInfoModel> typesInfo,
+    List<StatInfoModel> statsInfo,
     String url,
   }) {
     return PokemonModel(
@@ -47,8 +47,8 @@ class PokemonModel {
       name: name ?? this.name,
       weight: weight ?? this.weight,
       height: height ?? this.height,
-      types: types ?? this.types,
-      stats: stats ?? this.stats,
+      typesInfo: typesInfo ?? this.typesInfo,
+      statsInfo: statsInfo ?? this.statsInfo,
       url: url ?? this.url,
     );
   }

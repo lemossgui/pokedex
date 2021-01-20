@@ -11,8 +11,8 @@ class PokemonDI extends DependencyInjector {
 
     injector.registerFactory(
       (i) => PokemonMapper(
-        typeMapper: i.resolve(),
-        statMapper: i.resolve(),
+        typeInfoMapper: i.resolve(),
+        statInfoMapper: i.resolve(),
       ),
     );
 

@@ -1,6 +1,8 @@
 /// Models
 export 'src/domain/models/pokemon/pokemon.dart';
+export 'src/domain/models/stat_info/stat_info.dart';
 export 'src/domain/models/stat/stat.dart';
+export 'src/domain/models/type_info/type_info.dart';
 export 'src/domain/models/type/type.dart';
 
 /// Repositories
@@ -23,6 +25,7 @@ export 'src/presentation/screens/pokemon_list/pokemon_list.dart';
 
 /// Widgets
 export 'src/presentation/widgets/start_application/start_application.dart';
+export 'src/presentation/widgets/separated_row/separated_row_widget.dart';
 
 /// Theme
 export 'src/theme/colors.dart';

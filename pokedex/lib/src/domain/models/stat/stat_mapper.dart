@@ -7,7 +7,6 @@ class StatMapper extends JsonSerial<StatModel> {
 
     return {
       'name': model.name,
-      'base_stat': model.baseStat,
     };
   }
 
@@ -17,7 +16,6 @@ class StatMapper extends JsonSerial<StatModel> {
 
     return StatModel(
       name: map['name'],
-      baseStat: map['base_stat'],
     );
   }
 }
